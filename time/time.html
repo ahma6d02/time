@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Market</title>
+    <link rel="shortcut icon" href="r.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        #title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+        }
+        #title h1 {
+            font-size: 36px;
+            text-align: center;
+            color: #333;
+        }
+        #content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+    
+        #left, #right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin: 20px;
+        }
+    
+        #left_text, #right_text {
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    
+        #left_time, #right_time {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            width: 150px; /* Add this line to set a fixed width */
+        }
+    
+        #left_time:hover, #right_time:hover {
+            transform: scale(1.1);
+        }
+    
+        #click {
+            background-color: #008CBA;
+            color: white;
+            font-size: 24px;
+            padding: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            display: block;
+            margin: 0 auto;
+        }
+    
+        #click:hover {
+            background-color: #0073aa;
+        }
+
+        /* Media queries for responsive design */
+        @media only screen and (max-width: 768px) {
+            #content {
+                height: auto;
+            }
+            #left, #right {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            #title h1 {
+                font-size: 24px;
+            }
+            #left_text, #right_text {
+                font-size: 24px;
+            }
+            #left_time, #right_time {
+                font-size: 16px;
+            }
+            #click {
+                font-size: 20px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="title">
+        <h1>Black Market Time</h1>
+    </div>
+    <div id="content">
+        <div id="right">
+            <p id="right_text">true</p>
+            <button id="right_time"></button>
+        </div>
+        <div id="left">
+            <p id="left_text">false</p>
+            <button id="left_time"></button>
+        </div>
+    </div>
+
+    <div>
+        <button onclick="change_text()" id="click">click</button>
+    </div>
+    
+    <footer style="text-align: center; font-size: x-large;font-family: monospace;position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;">CREATED  by AAA</footer>
+    <script>
+        var i=0;
+        function getTime(offset) {
+            var now = new Date();
+            var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            return new Date(utc + (3600000*offset));
+        }
+    
+        function updateButtonTime() {
+            var leftButton = document.getElementById("left_time");
+            var rightButton = document.getElementById("right_time");
+    
+            var leftTime = getTime(3); // Iraq time
+            var rightTime = getTime(2); // Egypt time
+    
+            leftButton.innerText = leftTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',second: '2-digit' });
+            rightButton.innerText = rightTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',second: '2-digit' });
+        }
+    
+        function change_text() {
+            var leftTexts = [" Real time","Shiaa time"," 51% time","Fos5 time","Kard hasan ","Manar time"]
+            var rightTexts = ["Fake Time","Masihi time"," 16% time","Aub time","Blom Bank","MTV time"];
+
+            
+           
+
+            document.getElementById("left_text").innerHTML =  rightTexts[i];
+            document.getElementById("right_text").innerHTML = leftTexts[i];
+
+            updateButtonTime();
+
+            i=i+1
+
+            if(i==6)
+            {
+                i=0
+            }
+            
+        }
+
+        
+
+        updateButtonTime();
+        setInterval(updateButtonTime, 1000);
+    </script>
+</body>
+</html>
